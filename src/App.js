@@ -1,11 +1,13 @@
 import "./reset.css";
 import "./App.css";
+
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Switch, Route, Link, Redirect } from "react-router-dom";
-import Card from "./pages/card";
+import { Switch, Route, Link, useHistory } from "react-router-dom";
 import { useState } from "react";
+import Card from "./pages/card";
+import Login from "./pages/login";
 
 function App() {
   const formSchema = yup.object().shape({
@@ -18,11 +20,19 @@ function App() {
     emailConfirm: yup
       .string()
       .oneOf([yup.ref("email"), null], "E-mail diferente"),
-    password: yup.string().required("Senha obrigatória"),
+    password: yup
+      .string()
+      .required("Senha obrigatória")
+      .matches(
+        /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$/,
+        "Sua senha deve conter uma letra maíscula, uma minúcula, um número e um caracter especial"
+      ),
     passwordConfirm: yup
       .string()
       .oneOf([yup.ref("password"), null], "Senha diferente"),
   });
+
+  const history = useHistory();
 
   const {
     register,
@@ -36,12 +46,11 @@ function App() {
 
   const onSubmitHandle = (data) => {
     setUsers(data);
+
+    history.push("/card");
+
     // Fazer uma consulta a api utilizando esses dados
     // Enviar para api
-  };
-
-  const redirect = () => {
-    return <Redirect to="/card" />;
   };
 
   return (
@@ -88,14 +97,17 @@ function App() {
             />
             <p>{errors.password?.message}</p>
             <p>{errors.passwordConfirm?.message}</p>
-            <button type="submit" onClick={() => redirect()}>
+            <button type="submit" onClick={() => onSubmitHandle}>
               CADASTRAR
             </button>
-            <Link to="/card">Card</Link>
+            <Link to="/login">Já possui uma conta ?</Link>
           </form>
         </Route>
         <Route exact path="/card">
           <Card users={users} />
+        </Route>
+        <Route exact path="/login">
+          <Login />
         </Route>
       </Switch>
     </div>
