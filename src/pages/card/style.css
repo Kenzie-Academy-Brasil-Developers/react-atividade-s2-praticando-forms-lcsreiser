@@ -1,15 +1,28 @@
-h2,
-h3 {
+.dataUser,
+.user {
   color: whitesmoke;
 }
 
+.dataUser {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.user {
+  font-size: 24px;
+}
+
 .divCard {
-  border: 1px solid aqua;
+  border: 1px solid purple;
   padding: 10px;
+  box-shadow: 0 0 10px #482348;
+}
+
+.last {
+  margin-bottom: 20px;
 }
 
 a {
   color: whitesmoke;
   text-decoration: none;
-  text-align: end;
 }

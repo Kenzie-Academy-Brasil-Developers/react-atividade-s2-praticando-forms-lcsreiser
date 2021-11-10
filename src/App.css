@@ -27,6 +27,12 @@ input {
   text-align: center;
 }
 
+input:focus {
+  outline: none;
+  border: 1px solid purple;
+  box-shadow: 0 0 10px #482348;
+}
+
 .senha {
   width: 25vh;
 }

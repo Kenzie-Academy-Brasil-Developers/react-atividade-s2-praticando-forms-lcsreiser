@@ -3,7 +3,7 @@ import "./App.css";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route, Link, Redirect } from "react-router-dom";
 import Card from "./pages/card";
 import { useState } from "react";
 
@@ -40,7 +40,9 @@ function App() {
     // Enviar para api
   };
 
-  console.log(users);
+  const redirect = () => {
+    return <Redirect to="/card" />;
+  };
 
   return (
     <div className="divContainer">
@@ -51,15 +53,25 @@ function App() {
               placeholder="Nome do usuário"
               {...register("user")}
               maxLength="18"
+              autoComplete="off"
             />
             <p>{errors.user?.message}</p>
-            <input placeholder="Nome completo" {...register("name")} />
+            <input
+              placeholder="Nome completo"
+              {...register("name")}
+              autoComplete="off"
+            />
             <p>{errors.name?.message}</p>
-            <input placeholder="Endereço de e-mail" {...register("email")} />
+            <input
+              placeholder="Endereço de e-mail"
+              {...register("email")}
+              autoComplete="off"
+            />
             <p>{errors.email?.message}</p>
             <input
               placeholder="Confirme seu e-mail"
               {...register("emailConfirm")}
+              autoComplete="off"
             />
             <p>{errors.emailConfirm?.message}</p>
             <input
@@ -76,7 +88,9 @@ function App() {
             />
             <p>{errors.password?.message}</p>
             <p>{errors.passwordConfirm?.message}</p>
-            <button type="submit">CADASTRAR</button>
+            <button type="submit" onClick={() => redirect()}>
+              CADASTRAR
+            </button>
             <Link to="/card">Card</Link>
           </form>
         </Route>
