@@ -7,6 +7,7 @@ function Card({ users }) {
       <h2 className="dataUser">Dados do usuário</h2>
       <h3 className="user">Usuário - {users.user}</h3>
       <h3 className="user">Nome completo - {users.name}</h3>
+      <h3 className="user"> Telefone - {users.fone}</h3>
       <h3 className="user">E-mail - {users.email}</h3>
       <h3 className="user last">Senha - {users.password}</h3>
 

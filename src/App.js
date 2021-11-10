@@ -16,6 +16,13 @@ function App() {
       .required("Usuário obrigatório")
       .min(3, "O usuário precisa ter mais de 3 letras"),
     name: yup.string().required("Nome obrigatório"),
+    fone: yup
+      .string()
+      .required("Telefone obrigatório")
+      .matches(
+        /^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$/,
+        "Telefone inválido - ex: (47) 99999-9999"
+      ),
     email: yup.string().required("E-mail obrigatório").email("E-mail inválido"),
     emailConfirm: yup
       .string()
@@ -71,6 +78,12 @@ function App() {
               autoComplete="off"
             />
             <p>{errors.name?.message}</p>
+            <input
+              placeholder="Telefone"
+              {...register("fone")}
+              autoComplete="off"
+            />
+            <p>{errors.fone?.message}</p>
             <input
               placeholder="Endereço de e-mail"
               {...register("email")}
