@@ -25,8 +25,6 @@ function Login() {
 
   const onSubmitHandle = (data) => {
     setUsers(data);
-    // Fazer uma consulta a api utilizando esses dados
-    // Enviar para api
   };
 
   users && console.log(users);
